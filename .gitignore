@@ -12,9 +12,9 @@ __pycache__/
 # Django
 *.env
 media/
-apps/academia/migrations/
-apps/atendimento/migrations/
-apps/contas/migrations/
+# apps/academia/migrations/
+# apps/atendimento/migrations/
+# apps/contas/migrations/
 staticfiles/
 # Node
 node_modules/
