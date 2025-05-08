@@ -5,13 +5,8 @@ from rest_framework.pagination import PageNumberPagination
 from .models import Aluno, Turma, Graduacao, DiaSemana
 from .serializers import AlunoSerializer, GraduacaoSerializer, TurmaSerializer, DiaSemanaSerializer
 
-class CustomPagination(PageNumberPagination):
-    page_size = 20
-
-
 class AlunoViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
-    pagination_class = CustomPagination
 
     queryset = Aluno.objects.all()
     serializer_class = AlunoSerializer
