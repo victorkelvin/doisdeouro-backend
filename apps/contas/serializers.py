@@ -84,7 +84,8 @@ class InstrutorListSerializer(serializers.ModelSerializer):
             "contato",
             "foto",
             "is_active",
-            "faixa"
+            "faixa",
+            "is_staff"
         ]
 
 
