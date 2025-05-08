@@ -16,6 +16,8 @@ media/
 # apps/atendimento/migrations/
 # apps/contas/migrations/
 staticfiles/
+create_admin.py
+
 # Node
 node_modules/
 build/
