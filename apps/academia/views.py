@@ -6,7 +6,7 @@ from .models import Aluno, Turma, Graduacao, DiaSemana
 from .serializers import AlunoSerializer, GraduacaoSerializer, TurmaSerializer, DiaSemanaSerializer
 
 class CustomPagination(PageNumberPagination):
-    page_size = 150
+    page_size = 200
 
 
 class AlunoViewSet(viewsets.ModelViewSet):
