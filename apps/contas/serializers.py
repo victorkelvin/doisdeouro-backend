@@ -85,7 +85,7 @@ class InstrutorListSerializer(serializers.ModelSerializer):
             "foto",
             "is_active",
             "faixa",
-            "is_staff"
+            "is_superuser",
         ]
 
 
