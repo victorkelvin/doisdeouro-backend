@@ -59,9 +59,23 @@ class InstrutorUpdateSerializer(serializers.ModelSerializer):
         }
 
     def update(self, instance, validated_data):
+        import os
         password = validated_data.pop("password", None)
         if password:
             instance.set_password(password)
+
+        # Handle foto update: delete old foto file if new foto is provided
+        if "foto" in validated_data:
+            old_foto = instance.foto
+            new_foto = validated_data.get("foto")
+
+            if old_foto and old_foto != new_foto:
+                old_foto_path = old_foto.path
+                if os.path.exists(old_foto_path):
+                    try:
+                        os.remove(old_foto_path)
+                    except Exception as e:
+                        print(f"Erro ao deletar foto antiga: {e}")
 
         for attr, value in validated_data.items():
             setattr(instance, attr, value)

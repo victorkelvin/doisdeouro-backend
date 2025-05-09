@@ -47,14 +47,6 @@ class AlunoSerializer(serializers.ModelSerializer):
             return None
 
 
-
-        """ 
-        request = self.context.get('request')
-        if obj.foto:
-            return request.build_absolute_uri(obj.foto.url)
-        return None
- """
-
 class TurmaSerializer(serializers.ModelSerializer):
     dias = serializers.SerializerMethodField()  
 
