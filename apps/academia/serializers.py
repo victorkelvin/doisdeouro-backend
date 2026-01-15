@@ -10,7 +10,7 @@ class AlunoSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Aluno
-        fields = ['id', 'nome', 'data_nascimento', 'contato', 'foto', 'graduacao', 'faixa', 'turma', 'turma_nome', 'ativo', 'foto_base64']
+        fields = ['id', 'nome', 'responsavel', 'data_nascimento', 'contato', 'foto', 'graduacao', 'graus', 'faixa', 'turma', 'turma_nome', 'ativo', 'foto_base64']
 
     def get_foto_base64(self, obj):
         """
