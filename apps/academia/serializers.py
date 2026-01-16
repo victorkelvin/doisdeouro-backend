@@ -10,8 +10,8 @@ class AlunoSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Aluno
-        fields = ['id', 'nome', 'responsavel', 'data_nascimento', 'contato', 'foto', 'graduacao', 'graus', 'faixa', 'turma', 'turma_nome', 'ativo', 'foto_base64', 'data_graduacao', 'data_grau', 'email', 'data_cadastro']
-
+        fields = '__all__'
+        
     def get_foto_base64(self, obj):
         """
         Retorna a imagem em formato base64 para ser utilizada diretamente no frontend
