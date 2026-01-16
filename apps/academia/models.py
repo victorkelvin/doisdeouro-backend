@@ -78,7 +78,9 @@ class Aluno(models.Model):
     email = models.EmailField(verbose_name='Email', blank=True)
     turma = models.ForeignKey('Turma', on_delete=models.CASCADE, verbose_name='Turma', null=True)
     graduacao = models.ForeignKey('Graduacao', on_delete=models.SET_NULL, null=True, verbose_name='Graduação')
+    data_graduacao = models.DateField(null=True, blank=True, verbose_name='Data da Graduação')
     graus = models.IntegerField(default=0, verbose_name='Graus')
+    data_grau = models.DateField(null=True, blank=True, verbose_name='Data do Grau')
     responsavel = models.CharField(max_length=200, verbose_name='Responsável', blank=True)
     foto = models.ImageField(upload_to='alunos/', null=True, blank=True, verbose_name='Foto')
 
