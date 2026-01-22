@@ -37,9 +37,10 @@ class AlunoViewSet(viewsets.ModelViewSet):
     
     def get_permissions(self):
         """
-        Permite que usuários sem autenticação criem alunos com um token válido.
+        Permite que usuários sem autenticação criem alunos com um token válido
+        e validem tokens de convite.
         """
-        if self.action == 'create':
+        if self.action in ['create', 'validate_invitation']:
             return [AllowAny()]
         return [IsAuthenticated()]
     
