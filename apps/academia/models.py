@@ -1,4 +1,7 @@
 from django.db import models
+from django.utils import timezone
+import secrets
+from datetime import timedelta
 
 #Tabela de referência Graduações
 class Graduacao(models.Model):
@@ -91,3 +94,41 @@ class Aluno(models.Model):
         verbose_name = 'Aluno'
         verbose_name_plural = 'Alunos'
         ordering = ['nome']
+
+
+# Convite Temporário para criar Alunos
+class AlunoInvitation(models.Model):
+    token = models.CharField(max_length=255, unique=True, db_index=True)
+    expires_at = models.DateTimeField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self):
+        return f"Invitation - {self.token[:10]}..."
+    
+    @property
+    def is_expired(self):
+        return timezone.now() > self.expires_at
+    
+    @property
+    def is_valid(self):
+        return not self.is_expired
+    
+    @classmethod
+    def create_invitation(cls, hours=24):
+        """
+        Cria um novo convite temporário reutilizável
+        
+        Args:
+            hours: Número de horas até a expiração (padrão: 24)
+            
+        Returns:
+            AlunoInvitation: O convite criado
+        """
+        token = secrets.token_urlsafe(32)
+        expires_at = timezone.now() + timedelta(hours=hours)
+        return cls.objects.create(token=token, expires_at=expires_at)
+    
+    class Meta:
+        verbose_name = 'Convite de Aluno'
+        verbose_name_plural = 'Convites de Alunos'
+        ordering = ['-created_at']

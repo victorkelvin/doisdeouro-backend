@@ -1,7 +1,8 @@
 from rest_framework import serializers
-from .models import Aluno, Turma, Graduacao, DiaSemana
+from .models import Aluno, Turma, Graduacao, DiaSemana, AlunoInvitation
 import os
 import base64
+from django.utils import timezone
 
 class AlunoSerializer(serializers.ModelSerializer):
     faixa = serializers.StringRelatedField(source='graduacao.faixa', read_only=True)
@@ -68,5 +69,18 @@ class DiaSemanaSerializer(serializers.ModelSerializer):
     class Meta:
         model = DiaSemana
         fields = ['dia']
+
+
+class AlunoInvitationSerializer(serializers.ModelSerializer):
+    is_valid = serializers.SerializerMethodField()
+    expires_at = serializers.DateTimeField(format='%d/%m/%Y %H:%M:%S')
+    
+    class Meta:
+        model = AlunoInvitation
+        fields = ['token', 'expires_at', 'created_at', 'is_valid']
+        read_only_fields = ['created_at']
+    
+    def get_is_valid(self, obj):
+        return obj.is_valid
 
 
