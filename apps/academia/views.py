@@ -49,21 +49,24 @@ class AlunoViewSet(viewsets.ModelViewSet):
         Cria um novo aluno. Requer autenticação ou um token válido de convite.
         O token pode ser utilizado múltiplas vezes durante seu período de validade.
         """
-        token = request.data.get('invitation_token')
-        
-        if not token:
-            return Response(
-                {'error': 'Token de convite é obrigatório para criar um aluno'},
-                status=status.HTTP_400_BAD_REQUEST
-            )
-        
-        # Verifica se o token é válido
-        token_perm = TokenPermission(token)
-        if not token_perm.is_valid:
-            return Response(
-                {'error': 'Token de convite inválido ou expirado'},
-                status=status.HTTP_403_FORBIDDEN
-            )
+        # Se o usuário não está autenticado, requer um token válido
+        if not request.user.is_authenticated:
+            # token = request.data.get('invitation_token')
+            token = request.query_params.get('token')
+            
+            if not token:
+                return Response(
+                    {'error': 'Acesso negado'},
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+            
+            # Verifica se o token é válido
+            token_perm = TokenPermission(token)
+            if not token_perm.is_valid:
+                return Response(
+                    {'error': 'Acesso negado'},
+                    status=status.HTTP_403_FORBIDDEN
+                )
         
         # Processa a criação do aluno normalmente
         return super().create(request, *args, **kwargs)
