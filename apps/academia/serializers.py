@@ -53,7 +53,7 @@ class TurmaSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Turma
-        fields = ['id', 'nome', 'horario', 'dias', 'dias_da_semana']
+        fields = '__all__'
 
     def get_dias(self, obj):
         return [dia.dia for dia in obj.dias_da_semana.all()]

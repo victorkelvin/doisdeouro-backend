@@ -1,5 +1,5 @@
 from rest_framework import viewsets, status
-from rest_framework.permissions import IsAuthenticated, AllowAny
+from rest_framework.permissions import IsAuthenticated, AllowAny, DjangoModelPermissionsOrAnonReadOnly
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.decorators import action
 from rest_framework.response import Response
@@ -120,19 +120,18 @@ class AlunoViewSet(viewsets.ModelViewSet):
 
 
 class GraduacaoViewSet(viewsets.ModelViewSet):
-    permission_classes = [IsAuthenticated]
-
+    permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
     queryset = Graduacao.objects.all().order_by('id')
     serializer_class = GraduacaoSerializer
 
 class TurmaViewSet(viewsets.ModelViewSet):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
 
     queryset = Turma.objects.all().order_by('nome')
     serializer_class = TurmaSerializer
 
 class DiaSemanaViewSet(viewsets.ModelViewSet):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
 
     queryset = DiaSemana.objects.all()
     serializer_class = DiaSemanaSerializer
