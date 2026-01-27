@@ -21,9 +21,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 MEDIA_ROOT =  os.environ.get('RAILWAY_VOLUME_MOUNT_PATH', os.path.join(BASE_DIR, 'media/') )
 
 RAILWAY_PUBLIC_DOMAIN = os.environ.get('RAILWAY_PUBLIC_DOMAIN', '')
+RAILWAY_VOLUME_MOUNT_PATH = os.environ.get('RAILWAY_VOLUME_MOUNT_PATH', '/app/media/')
 if RAILWAY_PUBLIC_DOMAIN:
     # Para ambiente de produção no Railway
-    MEDIA_URL = f'https://{RAILWAY_PUBLIC_DOMAIN}/media/'
+    MEDIA_URL = f'https://{RAILWAY_PUBLIC_DOMAIN}{RAILWAY_VOLUME_MOUNT_PATH}'
 else:
     # Para desenvolvimento local
     MEDIA_URL = '/media/'
