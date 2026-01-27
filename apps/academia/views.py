@@ -11,7 +11,7 @@ from .serializers import (
 )
 
 class CustomPagination(PageNumberPagination):
-    page_size = 100
+    page_size = 1000
 
 
 class TokenPermission:
