@@ -1,14 +1,42 @@
 from rest_framework import serializers
 from .models import Aluno, Turma, Graduacao, DiaSemana, AlunoInvitation
+import base64
+import os
 
 class AlunoSerializer(serializers.ModelSerializer):
     faixa = serializers.StringRelatedField(source='graduacao.faixa', read_only=True)
     turma_nome = serializers.StringRelatedField(source='turma.nome', read_only=True)
+    foto_base64 = serializers.SerializerMethodField()
 
     class Meta:
         model = Aluno
         fields = '__all__'
-
+    
+    def get_foto_base64(self, obj):
+        """
+        Retorna a imagem em formato base64 para ser utilizada diretamente no frontend
+        """
+        if not obj.foto:
+            return None
+            
+        try:
+            # Pega o caminho absoluto do arquivo
+            img_path = obj.foto.path
+            
+            # Verifica se o arquivo existe
+            if not os.path.exists(img_path):
+                return None
+                
+            # Lê o arquivo e converte para base64
+            with open(img_path, "rb") as img_file:
+                encoded_string = base64.b64encode(img_file.read()).decode('utf-8')
+            
+                
+            # Retorna o data URL completo
+            return f"data:image/webp;base64,{encoded_string}"
+        except Exception as e:
+            print(f"Erro ao converter imagem para base64: {e}")
+            return None
 
 class TurmaSerializer(serializers.ModelSerializer):
     dias = serializers.SerializerMethodField()  
