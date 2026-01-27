@@ -11,7 +11,7 @@ from .serializers import (
 )
 
 class CustomPagination(PageNumberPagination):
-    page_size = 200
+    page_size = 100
 
 
 class TokenPermission:
@@ -32,7 +32,7 @@ class AlunoViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
     pagination_class = CustomPagination
 
-    queryset = Aluno.objects.all()
+    queryset = Aluno.objects.select_related('graduacao', 'turma').all()
     serializer_class = AlunoSerializer
     
     def get_permissions(self):
