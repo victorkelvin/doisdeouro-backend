@@ -6,7 +6,7 @@ from rest_framework.response import Response
 
 from .models import Aluno, Turma, Graduacao, DiaSemana, AlunoInvitation
 from .serializers import (
-    AlunoSerializer, GraduacaoSerializer, TurmaSerializer, 
+    AlunoListSerializer, AlunoDetailSerializer, GraduacaoSerializer, TurmaSerializer, 
     DiaSemanaSerializer, AlunoInvitationSerializer
 )
 
@@ -33,7 +33,11 @@ class AlunoViewSet(viewsets.ModelViewSet):
     pagination_class = CustomPagination
 
     queryset = Aluno.objects.select_related('graduacao', 'turma').all()
-    serializer_class = AlunoSerializer
+
+    def get_serializer_class(self):
+        if self.action == 'retrieve':
+            return AlunoDetailSerializer
+        return AlunoListSerializer
     
     def get_permissions(self):
         """
