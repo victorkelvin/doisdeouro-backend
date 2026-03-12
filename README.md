@@ -276,6 +276,32 @@ web: python manage.py migrate && gunicorn core.wsgi
 
 ---
 
+## 🤝 Contribuindo
+
+Contribuições são bem-vindas! Siga os passos abaixo:
+
+1. Faça um **fork** do projeto
+2. Crie uma branch para sua feature: `git checkout -b feature/minha-feature`
+3. Faça o commit das suas alterações: `git commit -m 'feat: adiciona minha feature'`
+4. Faça o push para a branch: `git push origin feature/minha-feature`
+5. Abra um **Pull Request**
+
+---
+
+## 👨‍💻 Autor
+
+**Victor Kelvin**
+
+[![GitHub](https://img.shields.io/badge/GitHub-victorkelvin-181717?logo=github)](https://github.com/victorkelvin)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-victor--kelvin-0A66C2?logo=linkedin)](https://linkedin.com/in/victor-k-oliveira)
+[![WhatsApp](https://img.shields.io/badge/WhatsApp-Contato-25D366?logo=whatsapp)](https://wa.me/5561985702670)
+
 ## 📄 Licença
 
-Este projeto está licenciado sob a licença **MIT** — veja o arquivo [LICENSE](LICENSE) para detalhes.
+Este projeto está licenciado sob a **Licença MIT** — veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+
+---
+
+<div align="center">
+  Feito com ❤️ para a <strong>Academia Dois de Ouro</strong>
+</div>
